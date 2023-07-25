@@ -1,35 +1,47 @@
-import AppHeader from "../appHeader/AppHeader";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import AppHeader from '../appHeader/AppHeader';
+import AppFooter from '../appFooter/AppFooter';
+import SignIn from '../signIn/SignIn';
+import SignUp from '../signUp/SignUp';
+import Spinner from '../spinner/Spinner';
 import '../../css/style.css';
-import AppFooter from "../appFooter/AppFooter";
-import FiltersBlock from "../ filtersBlock/FiltersBlock";
-import TravelList from "../travelList/TravelList";
-import Bookings from "../bookings/Bookings";
-import TripPage from "../pages/TripPage";
-import SignIn from "../signIn/SignIn";
-import SignUp from "../signUp/SignUp";
-import Modal from "../modal/Modal";
 
-
+const MainPage = lazy(() => import('../pages/MainPage'));
+const Bookings = lazy(() => import('../bookings/Bookings'));
+const TripPage = lazy(() => import('../pages/TripPage'));
 function App() {
+  const [bookings, setBookings] = useState([]);
+
+  const addBooking = (booking) => {
+    setBookings([...bookings, booking]);
+  };
+
+  const onCancelBooking = (index) => {
+    const updatedBookings = [...bookings];
+    updatedBookings.splice(index, 1);
+    setBookings(updatedBookings);
+  };
+
   return (
     <Router>
       <div className="App">
-        <AppHeader/>
+        <AppHeader />
         <main>
-          <FiltersBlock/>
-          <TravelList/>
-          <Bookings/>
-          <TripPage/>
-          <SignIn/>
-          <SignUp/>
-          <Modal/>
-          <Routes>
-            <Route/>
-          </Routes>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route exact path="/" element={<MainPage />} />
+              <Route exact path="/sign-up" element={<SignUp />} />
+              <Route exact path="/sign-in" element={<SignIn />} />
+              <Route exact path="/bookings" element={<Bookings bookings={bookings} onCancelBooking={onCancelBooking} />} />
+              <Route exact path="/trip/:tripId" element={<TripPage addBooking={addBooking} />} />
+              <Route path="*" element={<MainPage />} />
+            </Routes>
+          </Suspense>
         </main>
-        <AppFooter/>
+        <AppFooter />
       </div>
     </Router>
   );

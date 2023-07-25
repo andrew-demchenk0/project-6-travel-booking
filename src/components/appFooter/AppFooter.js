@@ -1,4 +1,4 @@
-import {HeartIcon} from "../../resources/images/HeartIcon";
+import heartSVG from "../../resources/images/heart.svg";
 
 const AppFooter = () => {
   return (
@@ -9,7 +9,7 @@ const AppFooter = () => {
           binary studio
         </a>
         with
-        <HeartIcon className="footer__icon" alt="heart"/>
+        <img src={heartSVG} className="footer__icon" alt="heart"/>
       </span>
     </footer>
   );

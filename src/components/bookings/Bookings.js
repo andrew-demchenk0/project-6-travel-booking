@@ -1,58 +1,43 @@
-const Bookings = () => {
+import React from 'react';
+
+const Bookings = ({ bookings, onCancelBooking }) => {
+  if (bookings.length === 0) {
+    return <div style={{ margin: '50px auto'}}>No bookings found</div>;
+  }
+  const sortedBookings = bookings.sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <main className="bookings-page">
       <h1 className="visually-hidden">Travel App</h1>
       <ul className="bookings__list">
-        <li data-test-id="booking" className="booking">
-          <h3 data-test-id="booking-title" className="booking__title">Iceland</h3>
-          <span data-test-id="booking-guests" className="booking__guests">
-            2 guests
-          </span>
-          <span data-test-id="booking-date" className="booking__date">
-            2024-07-13
-          </span>
-          <span data-test-id="booking-total" className="booking__total">
-            14000 $
-          </span>
-          <button data-test-id="booking-cancel" className="booking__cancel" title="Cancel booking">
-            <span className="visually-hidden">Cancel booking</span>
-            ×
-          </button>
-        </li>
-        <li data-test-id="booking" className="booking">
-          <h3 data-test-id="booking-title" className="booking__title">Iceland</h3>
-          <span data-test-id="booking-guests" className="booking__guests">
-            2 guests
-          </span>
-          <span data-test-id="booking-date" className="booking__date">
-            2024-09-30
-          </span>
-          <span data-test-id="booking-total" className="booking__total">
-            14000 $
-          </span>
-          <button data-test-id="booking-cancel" className="booking__cancel" title="Cancel booking">
-            <span className="visually-hidden">Cancel booking</span>
-            ×
-          </button>
-        </li>
-        <li data-test-id="booking" className="booking">
-          <h3 data-test-id="booking-title" className="booking__title">Iceland</h3>
-          <span data-test-id="booking-guests" className="booking__guests">
-            2 guests
-          </span>
-          <span data-test-id="booking-date" className="booking__date">
-            2024-10-11
-          </span>
-          <span data-test-id="booking-total" className="booking__total">
-            14000 $
-          </span>
-          <button data-test-id="booking-cancel" className="booking__cancel" title="Cancel booking">
-            <span className="visually-hidden">Cancel booking</span>
-            ×
-          </button>
-        </li>
+        {sortedBookings.map((booking, index) => (
+          <li key={index} data-test-id="booking" className="booking">
+            <h3 data-test-id="booking-title" className="booking__title">
+              {booking.tripData.title}
+            </h3>
+            <span data-test-id="booking-guests" className="booking__guests">
+              {booking.guests} guests
+            </span>
+            <span data-test-id="booking-date" className="booking__date">
+              {booking.date}
+            </span>
+            <span data-test-id="booking-total" className="booking__total">
+              {booking.tripData.price * booking.guests} $
+            </span>
+            <button
+              data-test-id="booking-cancel"
+              className="booking__cancel"
+              title="Cancel booking"
+              onClick={() => onCancelBooking(index)}
+            >
+              <span className="visually-hidden">Cancel booking</span>
+              ×
+            </button>
+          </li>
+        ))}
       </ul>
     </main>
   );
-}
+};
+
 export default Bookings;

@@ -106,7 +106,6 @@ main {
 img {
     display: block;
     max-width: 100%;
-    height: auto;
 }
 
 input,
@@ -213,7 +212,13 @@ select {
 }
 
 /* loader */
-
+.center-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100%;
+}
 .loader {
     width: 60px;
     height: 60px;
@@ -221,6 +226,7 @@ select {
     border-top: 4px solid transparent;
     border-radius: 50%;
     animation: rotate 1.2s infinite linear;
+    margin: auto;
 }
 
 /* trip-info */

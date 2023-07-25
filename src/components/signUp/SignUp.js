@@ -1,4 +1,29 @@
+import { Link, useNavigate } from "react-router-dom";
+
 const SignUp = () => {
+  const navigate = useNavigate();
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target.form;
+    const fullName = form.elements["full-name"].value;
+    const email = form.elements["email"].value;
+    const password = form.elements["password"].value;
+
+
+    if (!fullName || !email || !password) {
+      alert("All fields are required.");
+      return;
+    }
+
+    if (password.length < 3 || password.length > 20) {
+      alert("Password must be between 3 and 20 characters.");
+      return;
+    }
+
+    navigate("/");
+  };
+
   return(
     <main className="sign-up-page">
       <h1 className="visually-hidden">Travel App</h1>
@@ -16,13 +41,16 @@ const SignUp = () => {
           <span className="input__heading">Password</span>
           <input data-test-id="auth-password" name="password" type="password" autoComplete="new-password" required=""/>
         </label>
-        <button data-test-id="auth-submit" className="button" type="submit">
+        <button data-test-id="auth-submit"
+                onClick={handleSignUp}
+                className="button"
+                type="submit">
           Sign Up
         </button>
       </form>
       <span>
         Already have an account?
-        <a data-test-id="auth-sign-in-link" href="./sign-in.html" className="sign-up-form__link">Sign In</a>
+        <Link to="/sign-in" data-test-id="auth-sign-in-link" className="sign-up-form__link">Sign In</Link>
       </span>
     </main>
   );
