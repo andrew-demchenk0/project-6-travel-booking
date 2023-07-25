@@ -11,7 +11,9 @@ const Bookings = ({ bookings, onCancelBooking }) => {
       <h1 className="visually-hidden">Travel App</h1>
       <ul className="bookings__list">
         {sortedBookings.map((booking, index) => (
-          <li key={index} data-test-id="booking" className="booking">
+          <li key={index}
+              data-test-id="booking"
+              className="booking">
             <h3 data-test-id="booking-title" className="booking__title">
               {booking.tripData.title}
             </h3>
@@ -24,12 +26,10 @@ const Bookings = ({ bookings, onCancelBooking }) => {
             <span data-test-id="booking-total" className="booking__total">
               {booking.tripData.price * booking.guests} $
             </span>
-            <button
-              data-test-id="booking-cancel"
-              className="booking__cancel"
-              title="Cancel booking"
-              onClick={() => onCancelBooking(index)}
-            >
+            <button data-test-id="booking-cancel"
+                    className="booking__cancel"
+                    title="Cancel booking"
+                    onClick={() => onCancelBooking(index)}>
               <span className="visually-hidden">Cancel booking</span>
               ×
             </button>

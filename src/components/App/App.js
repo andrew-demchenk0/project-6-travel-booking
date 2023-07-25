@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
 
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
-import SignIn from '../signIn/SignIn';
-import SignUp from '../signUp/SignUp';
 import Spinner from '../spinner/Spinner';
 import '../../css/style.css';
 
 const MainPage = lazy(() => import('../pages/MainPage'));
 const Bookings = lazy(() => import('../bookings/Bookings'));
 const TripPage = lazy(() => import('../pages/TripPage'));
+const SignIn = lazy(() => import('../signIn/SignIn'));
+const SignUp = lazy(() => import('../signUp/SignUp'));
+
 function App() {
   const [bookings, setBookings] = useState([]);
 

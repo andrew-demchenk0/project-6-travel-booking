@@ -1,7 +1,6 @@
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation} from 'react-router-dom';
 import userSVG from '../../resources/images/user.svg';
 import briefcaseSVG from '../../resources/images/briefcase.svg';
-
 
 const AppHeader = () => {
   const location = useLocation();
@@ -10,14 +9,18 @@ const AppHeader = () => {
   return (
     <header className="header">
       <div className="header__inner">
-        <Link to="/" data-test-id="header-logo" className="header__logo">
-          Travel App
+        <Link to="/"
+              data-test-id="header-logo"
+              className="header__logo">
+              Travel App
         </Link>
         { showNavigation && (
           <nav data-test-id="header-nav" className="header__nav">
             <ul className="nav-header__list">
               <li className="nav-header__item" title="Bookings">
-                <Link to="/bookings" data-test-id="header-bookings-link" className="nav-header__inner">
+                <Link to="/bookings"
+                      data-test-id="header-bookings-link"
+                      className="nav-header__inner">
                   <span className="visually-hidden">Bookings</span>
                   <img src={briefcaseSVG} alt='booking'/>
                 </Link>
@@ -29,12 +32,13 @@ const AppHeader = () => {
                   <ul data-test-id="header-profile-nav-list" className="profile-nav__list">
                     <li data-test-id="header-profile-nav-username"
                         className="profile-nav__item profile-nav__username">
-                      John Doe
+                        John Doe
                     </li>
                     <li className="profile-nav__item">
-                      <Link to="/sign-in" data-test-id="header-profile-nav-sign-out"
+                      <Link to="/sign-in"
+                            data-test-id="header-profile-nav-sign-out"
                             className="profile-nav__sign-out button">
-                        Sign Out
+                            Sign Out
                       </Link>
                     </li>
                   </ul>

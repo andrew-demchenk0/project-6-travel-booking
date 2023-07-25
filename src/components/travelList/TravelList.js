@@ -1,9 +1,8 @@
-import { useState }  from "react";
-import { Link } from "react-router-dom";
-import Spinner from "../spinner/Spinner";
-import tripsData from '../../data/trips.json';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Spinner from '../spinner/Spinner';
 
-const TravelList = () => {
+const TravelList = ({ trips }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const loading = () => {
@@ -14,41 +13,44 @@ const TravelList = () => {
     <section className="trips">
       <h2 className="visually-hidden">Trips List</h2>
       <ul className="trip-list">
-        {tripsData.map((trip) => (
-          <li key={trip.id} data-test-id="trip-card" className="trip-card">
+        {trips.map((trip) => (
+          <li key={trip.id}
+              data-test-id="trip-card"
+              className="trip-card">
             {!imagesLoaded && <Spinner />}
-            <img
-              data-test-id="trip-card-image"
-              src={trip.image}
-              alt="trip photo"
-              style={{ display: imagesLoaded ? "block" : "none" }}
-              onLoad={loading}/>
+            <img data-test-id="trip-card-image"
+                 src={trip.image}
+                 alt="trip photo"
+                 style={{ display: imagesLoaded ? "block" : "none" }}
+                 onLoad={loading}/>
             <div className="trip-card__content">
               <div className="trip-info">
-                <h3 data-test-id="trip-card-title" className="trip-info__title">
-                  {trip.title}
+                <h3 data-test-id="trip-card-title"
+                    className="trip-info__title">
+                    {trip.title}
                 </h3>
                 <div className="trip-info__content">
                   <span data-test-id="trip-card-duration" className="trip-info__duration">
                     <strong>{trip.duration}</strong> days
                   </span>
-                  <span data-test-id="trip-card-level" className="trip-info__level">
-                    {trip.level}
+                  <span data-test-id="trip-card-level"
+                        className="trip-info__level">
+                        {trip.level}
                   </span>
                 </div>
               </div>
               <div className="trip-price">
                 <span>Price</span>
-                <strong data-test-id="trip-card-price-value" className="trip-price__value">
-                  {trip.price} $
+                <strong data-test-id="trip-card-price-value"
+                        className="trip-price__value">
+                        {trip.price} $
                 </strong>
               </div>
             </div>
-            <Link
-              to={`/trip/${trip.id}`}
-              data-test-id="trip-card-link"
-              className="button">
-              Discover a trip
+            <Link to={`/trip/${trip.id}`}
+                  data-test-id="trip-card-link"
+                  className="button">
+                  Discover a trip
             </Link>
           </li>
         ))}
@@ -58,3 +60,4 @@ const TravelList = () => {
 };
 
 export default TravelList;
+

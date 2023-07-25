@@ -28,7 +28,9 @@ const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
                 onClick={onClose}>
                 ×
         </button>
-        <form className="book-trip-popup__form" autoComplete="off" onSubmit={handleFormSubmit}>
+        <form className="book-trip-popup__form"
+              autoComplete="off"
+              onSubmit={handleFormSubmit}>
           <div className="trip-info">
             <h3 data-test-id="book-trip-popup-title"
                 className="trip-info__title">
@@ -50,7 +52,7 @@ const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
                    name="date"
                    type="date"
                    required
-                   min={new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                   min={new Date(new Date().getTime() +2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
                    value={date}
                    onChange={handleDateChange}/>
           </label>
