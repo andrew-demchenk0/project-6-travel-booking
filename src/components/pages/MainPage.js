@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FiltersBlock from '../filtersBlock/FiltersBlock';
-import TravelList from '../travelList/TravelList';
+import TripsFilter from '../tripsFilter/TripsFilter';
+import TripsList from '../tripsList/TripsList';
 import tripsData from '../../data/trips.json';
 
 const MainPage = () => {
@@ -39,10 +39,10 @@ const MainPage = () => {
 
   return (
     <>
-      <FiltersBlock onSearchChange={handleSearchChange}
-                    onDurationChange={handleDurationChange}
-                    onLevelChange={handleLevelChange} />
-      <TravelList trips={filteredTrips} />
+      <TripsFilter onSearchChange={handleSearchChange}
+                   onDurationChange={handleDurationChange}
+                   onLevelChange={handleLevelChange} />
+      <TripsList trips={filteredTrips} />
     </>
   );
 };

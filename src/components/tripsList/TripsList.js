@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../spinner/Spinner';
-import './travelList.scss';
+import './tripsList.scss';
 
-const TravelList = ({ trips }) => {
+const TripsList = ({ trips }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const loading = () => {
@@ -63,5 +63,5 @@ const TravelList = ({ trips }) => {
   );
 };
 
-export default TravelList;
+export default TripsList;
 

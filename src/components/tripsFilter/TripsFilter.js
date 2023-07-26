@@ -1,7 +1,7 @@
 import React from 'react';
-import './filtersBlock.scss';
+import './tripsFilter.scss';
 
-const FiltersBlock = ({onSearchChange, onDurationChange, onLevelChange}) => {
+const TripsFilter = ({onSearchChange, onDurationChange, onLevelChange}) => {
   return (
     <section className="trips-filter">
       <h2 className="visually-hidden">Trips filter</h2>
@@ -42,4 +42,4 @@ const FiltersBlock = ({onSearchChange, onDurationChange, onLevelChange}) => {
   );
 };
 
-export default FiltersBlock;
+export default TripsFilter;

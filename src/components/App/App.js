@@ -7,10 +7,10 @@ import Spinner from '../spinner/Spinner';
 
 
 const MainPage = lazy(() => import('../pages/MainPage'));
-const Bookings = lazy(() => import('../bookings/Bookings'));
-const TripPage = lazy(() => import('../pages/TripPage'));
-const SignIn = lazy(() => import('../signIn/SignIn'));
-const SignUp = lazy(() => import('../signUp/SignUp'));
+const BookingPage = lazy(() => import('../pages/bookings/Bookings'));
+const TripInfoPage = lazy(() => import('../pages/tripInfo/TripInfo'));
+const SignInPage = lazy(() => import('../pages/signIn/SignIn'));
+const SignUpPage = lazy(() => import('../pages/signUp/SignUp'));
 
 function App() {
   const [bookings, setBookings] = useState([]);
@@ -33,10 +33,10 @@ function App() {
           <Suspense fallback={<Spinner />}>
             <Routes>
               <Route exact path="/" element={<MainPage />} />
-              <Route exact path="/sign-up" element={<SignUp />} />
-              <Route exact path="/sign-in" element={<SignIn />} />
-              <Route exact path="/bookings" element={<Bookings bookings={bookings} onCancelBooking={onCancelBooking} />} />
-              <Route exact path="/trip/:tripId" element={<TripPage addBooking={addBooking} />} />
+              <Route exact path="/sign-up" element={<SignUpPage />} />
+              <Route exact path="/sign-in" element={<SignInPage />} />
+              <Route exact path="/bookings" element={<BookingPage bookings={bookings} onCancelBooking={onCancelBooking} />} />
+              <Route exact path="/trip/:tripId" element={<TripInfoPage addBooking={addBooking} />} />
               <Route path="*" element={<MainPage />} />
             </Routes>
           </Suspense>

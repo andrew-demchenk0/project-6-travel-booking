@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Modal from '../modal/Modal';
-import tripsData from '../../data/trips.json';
-import './tripPage.scss';
-const TripPage = ({ addBooking }) => {
+import Modal from '../../modal/Modal';
+import tripsData from '../../../data/trips.json';
+import './tripInfo.scss';
+const TripInfo = ({ addBooking }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState(null);
   const { tripId } = useParams();
@@ -77,4 +77,4 @@ const TripPage = ({ addBooking }) => {
   );
 }
 
-export default TripPage;
+export default TripInfo;
