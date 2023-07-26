@@ -1,4 +1,5 @@
 import React from 'react';
+import './filtersBlock.scss';
 
 const FiltersBlock = ({onSearchChange, onDurationChange, onLevelChange}) => {
   return (
@@ -8,6 +9,7 @@ const FiltersBlock = ({onSearchChange, onDurationChange, onLevelChange}) => {
         <label className="trips-filter__search input">
           <span className="visually-hidden">Search by name</span>
           <input data-test-id="filter-search"
+                 className="input-search"
                  name="search"
                  type="search"
                  placeholder="search by title"

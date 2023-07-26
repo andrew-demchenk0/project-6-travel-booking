@@ -1,6 +1,7 @@
 import {Link, useLocation} from 'react-router-dom';
 import userSVG from '../../resources/images/user.svg';
 import briefcaseSVG from '../../resources/images/briefcase.svg';
+import './appHeader.scss';
 
 const AppHeader = () => {
   const location = useLocation();

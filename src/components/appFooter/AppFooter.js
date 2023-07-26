@@ -1,5 +1,5 @@
 import heartSVG from '../../resources/images/heart.svg';
-
+import './appFooter.scss';
 const AppFooter = () => {
   return (
     <footer className="footer">

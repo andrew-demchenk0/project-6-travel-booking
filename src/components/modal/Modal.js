@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './modal.scss';
 
 const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
   const [date, setDate] = useState('');
@@ -52,7 +53,7 @@ const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
                    name="date"
                    type="date"
                    required
-                   min={new Date(new Date().getTime() +2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                   min={new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
                    value={date}
                    onChange={handleDateChange}/>
           </label>

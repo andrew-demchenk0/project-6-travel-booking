@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Modal from '../modal/Modal';
 import tripsData from '../../data/trips.json';
-
+import './tripPage.scss';
 const TripPage = ({ addBooking }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState(null);

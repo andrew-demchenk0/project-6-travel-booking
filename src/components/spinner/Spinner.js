@@ -1,3 +1,5 @@
+import './spinner.scss';
+
 const Spinner = () => {
   return(
     <div className='center-loader'>

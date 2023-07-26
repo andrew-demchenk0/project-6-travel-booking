@@ -1,4 +1,5 @@
 import React from 'react';
+import './bookings.scss';
 
 const Bookings = ({ bookings, onCancelBooking }) => {
   if (bookings.length === 0) {

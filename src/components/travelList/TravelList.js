@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../spinner/Spinner';
+import './travelList.scss';
 
 const TravelList = ({ trips }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -18,11 +19,14 @@ const TravelList = ({ trips }) => {
               data-test-id="trip-card"
               className="trip-card">
             {!imagesLoaded && <Spinner />}
-            <img data-test-id="trip-card-image"
-                 src={trip.image}
-                 alt="trip photo"
-                 style={{ display: imagesLoaded ? "block" : "none" }}
-                 onLoad={loading}/>
+            <div className="trip-card-image__wrapper">
+              <img data-test-id="trip-card-image"
+                   className="trip-card-image"
+                   src={trip.image}
+                   alt="trip photo"
+                   style={{ display: imagesLoaded ? "block" : "none" }}
+                   onLoad={loading}/>
+            </div>
             <div className="trip-card__content">
               <div className="trip-info">
                 <h3 data-test-id="trip-card-title"

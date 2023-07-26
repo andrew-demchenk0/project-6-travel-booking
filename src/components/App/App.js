@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
 import Spinner from '../spinner/Spinner';
-import '../../css/style.css';
+
 
 const MainPage = lazy(() => import('../pages/MainPage'));
 const Bookings = lazy(() => import('../bookings/Bookings'));
