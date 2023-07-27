@@ -10,6 +10,10 @@ const TripsList = ({ trips }) => {
     setImagesLoaded(true);
   };
 
+  if (trips.length === 0) {
+    return <div style={{ margin: '50px auto'}}>No trips found</div>;
+  }
+
   return (
     <section className="trips">
       <h2 className="visually-hidden">Trips List</h2>
