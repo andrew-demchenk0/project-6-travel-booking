@@ -2,15 +2,26 @@ import {Link, useLocation} from 'react-router-dom';
 import userSVG from '../../resources/images/user.svg';
 import briefcaseSVG from '../../resources/images/briefcase.svg';
 import './appHeader.scss';
+import {signOut} from "../../redux/authSlice";
+import { toast } from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
 
 const AppHeader = () => {
   const location = useLocation();
-  const showNavigation = !['/sign-up', '/sign-in'].includes(location.pathname);
+  const showNavigation = !['/auth/sign-up', '/auth/sign-in'].includes(location.pathname);
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    dispatch(signOut());
+    toast.success('You have successfully signed out.');
+  };
+
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <header className="header">
       <div className="header__inner">
-        <Link to="/"
+        <Link to="/trips"
               data-test-id="header-logo"
               className="header__logo">
               Travel App
@@ -33,12 +44,13 @@ const AppHeader = () => {
                   <ul data-test-id="header-profile-nav-list" className="profile-nav__list">
                     <li data-test-id="header-profile-nav-username"
                         className="profile-nav__item profile-nav__username">
-                        John Doe
+                        {user && user.fullName}
                     </li>
                     <li className="profile-nav__item">
-                      <Link to="/sign-in"
+                      <Link to="/auth/sign-in"
                             data-test-id="header-profile-nav-sign-out"
-                            className="profile-nav__sign-out button">
+                            className="profile-nav__sign-out button"
+                            onClick={handleSignOut}>
                             Sign Out
                       </Link>
                     </li>

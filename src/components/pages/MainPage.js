@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TripsFilter from '../tripsFilter/TripsFilter';
 import TripsList from '../tripsList/TripsList';
-import tripsData from '../../data/trips.json';
+import { getTrips } from "../../redux/tripSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  const trips = useSelector((state) => state.trips.trips);
+
+
+  useEffect(() => {
+    dispatch(getTrips())
+      .catch((error) => {
+        console.error('Error fetching trips:', error);
+      });
+
+  }, [dispatch]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [durationFilter, setDurationFilter] = useState("");
   const [levelFilter, setLevelFilter] = useState("");
@@ -19,7 +32,8 @@ const MainPage = () => {
     );
   };
 
-  const filteredTrips = tripsData.filter((trip) => {
+  const filteredTrips = trips.filter((trip) => {
+
     const isDurationMatch = durationFilter ? isDurationInRange(trip.duration) : true;
     const isLevelMatch = levelFilter ? trip.level === levelFilter : true;
     const isSearchMatch = searchTerm ? trip.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;

@@ -2,7 +2,7 @@ import React from 'react';
 import './bookings.scss';
 
 const Bookings = ({ bookings, onCancelBooking }) => {
-  if (bookings.length === 0) {
+  if (bookings && bookings.length === 0) {
     return <div style={{ margin: '50px auto'}}>No bookings found</div>;
   }
   const sortedBookings = bookings.sort((a, b) => new Date(a.date) - new Date(b.date));
