@@ -1,9 +1,9 @@
 import './spinner.scss';
 
 const Spinner = () => {
-  return(
+  return (
     <div className='center-loader'>
-      <div className="loader"></div>
+      <div data-test-id="loader" className="loader"></div>
     </div>
   );
 }
