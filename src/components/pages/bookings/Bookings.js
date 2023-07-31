@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cancelBooking, getBookings } from '../../../redux/bookingSlice';
-import './bookings.scss';
 import { toast } from "react-toastify";
 import { checkTokenAndExecuteRequest } from "../../helper/checkTokenAndExecuteRequest";
+import './bookings.scss';
 
 const Bookings = () => {
   const dispatch = useDispatch();

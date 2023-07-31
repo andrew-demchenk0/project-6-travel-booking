@@ -2,27 +2,27 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { bookTripAPI, cancelBookingAPI, getBookingsAPI } from '../services/bookingService';
 
 export const getBookings = createAsyncThunk('bookings/getBookings', async (_, { getState }) => {
+  const token = localStorage.getItem('token');
   try {
-    const { auth } = getState();
-    return await getBookingsAPI(auth.token);
+    return await getBookingsAPI(token);
   } catch (error) {
     throw error;
   }
 });
 
 export const bookTrip = createAsyncThunk('bookings/bookTrip', async (bookingData, { getState }) => {
+  const token = localStorage.getItem('token');
   try {
-    const { auth } = getState();
-    return await bookTripAPI(bookingData, auth.token);
+    return await bookTripAPI(bookingData, token);
   } catch (error) {
     throw error;
   }
 });
 
 export const cancelBooking = createAsyncThunk('bookings/cancelBooking', async (bookingId, { getState }) => {
+  const token = localStorage.getItem('token');
   try {
-    const { auth } = getState();
-    return await cancelBookingAPI(bookingId, auth.token);
+    return await cancelBookingAPI(bookingId, token);
   } catch (error) {
     throw error;
   }
