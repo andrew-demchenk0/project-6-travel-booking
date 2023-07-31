@@ -34,9 +34,7 @@ export const getTripByIdAPI = async (tripId) => {
       throw new Error('Failed to fetch trip by id.');
     }
 
-    const data = await response.json();
-    console.log('data id', data);
-    return data;
+    return await response.json();
   } catch (error) {
     throw error;
   }

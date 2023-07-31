@@ -4,8 +4,9 @@ import Modal from '../../modal/Modal';
 import './tripInfo.scss';
 import { getTripById } from "../../../redux/tripSlice";
 import { useSelector, useDispatch } from "react-redux";
+import Spinner from "../../spinner/Spinner";
 
-const TripInfo = ({ addBooking }) => {
+const TripInfo = () => {
   const { tripId } = useParams();
   const dispatch = useDispatch();
   const selectedTrip = useSelector((state) => state.trips.selectedTrip);
@@ -30,11 +31,11 @@ const TripInfo = ({ addBooking }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner/>;
   }
 
   if (error) {
-    return <div>Error fetching trip details: {error}</div>;
+    return console.error('Error fetching trip details:', error);
   }
 
   if (!selectedTrip) {
@@ -53,7 +54,7 @@ const TripInfo = ({ addBooking }) => {
           <div className="trip-info">
             <h3 data-test-id="trip-details-title"
                 className="trip-info__title">
-              {selectedTrip.title}
+                {selectedTrip.title}
             </h3>
             <div className="trip-info__content">
               <span data-test-id="trip-details-duration" className="trip-info__duration">
@@ -67,31 +68,26 @@ const TripInfo = ({ addBooking }) => {
           </div>
           <div data-test-id="trip-details-description"
                className="trip__description">
-            {selectedTrip.description}
+               {selectedTrip.description}
           </div>
           <div className="trip-price">
             <span>Price</span>
             <strong data-test-id="trip-details-price-value"
                     className="trip-price__value">
-              {selectedTrip.price} $
+                    {selectedTrip.price} $
             </strong>
           </div>
           <button data-test-id="trip-details-button"
                   className="trip__button button"
                   onClick={handleOpenModal}>
-            Book a trip
+                  Book a trip
           </button>
         </div>
       </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen}
                onClose={handleCloseModal}
-               tripData={selectedTrip}
-               onSaveBooking={(bookingData) => {
-                 addBooking(bookingData);
-                 setIsModalOpen(false);
-               }}
-        />
+               tripData={selectedTrip}/>
       )}
     </main>
   );

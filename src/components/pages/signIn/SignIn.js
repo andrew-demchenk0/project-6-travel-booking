@@ -21,7 +21,6 @@ const SignIn = () => {
       ...formData,
       [name]: value,
     });
-    console.log('123', formData)
   };
 
   const handleSignIn = async (event) => {
@@ -38,6 +37,7 @@ const SignIn = () => {
     }
     try {
       await dispatch(signInUser(formData));
+      toast.success('You have successfully signed in.');
       navigate('/');
     } catch (error) {
       toast.error('Invalid credentials. Please try again.');
@@ -57,8 +57,7 @@ const SignIn = () => {
             type="email"
             required=""
             value={formData.email}
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}/>
         </label>
         <label className="input">
           <span className="input__heading">Password</span>
@@ -69,8 +68,7 @@ const SignIn = () => {
             autoComplete="new-password"
             required=""
             value={formData.password}
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}/>
         </label>
         <button
           data-test-id="auth-submit"
@@ -83,8 +81,10 @@ const SignIn = () => {
       </form>
       <span>
         Don't have an account?
-        <Link to="/auth/sign-up" data-test-id="auth-sign-up-link" className="sign-in-form__link">
-          Sign Up
+        <Link to="/auth/sign-up"
+              data-test-id="auth-sign-up-link"
+              className="sign-in-form__link">
+              Sign Up
         </Link>
       </span>
     </main>

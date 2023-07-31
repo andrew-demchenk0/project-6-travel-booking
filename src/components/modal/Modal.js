@@ -1,21 +1,30 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './modal.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { bookTrip } from '../../redux/bookingSlice';
+import { toast } from "react-toastify";
 
-const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
+const Modal = ({ isOpen, onClose, tripData }) => {
   const [date, setDate] = useState('');
   const [guests, setGuests] = useState(1);
+  const dispatch = useDispatch();
+  const authUser = useSelector((state) => state.auth.user);
 
   const handleDateChange = (event) => {
     const selectedDate = event.target.value;
     setDate(selectedDate);
   };
+
   const handleGuestsChange = (event) => {
     const numGuests = parseInt(event.target.value);
     setGuests(numGuests);
   };
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    onSaveBooking({ date, guests, tripData });
+    const bookingData = { tripId: tripData.id, userId: authUser.id, guests, date };
+    dispatch(bookTrip(bookingData));
+    toast.success('Trip is booked, go booking to view')
     onClose();
   };
 
@@ -35,7 +44,7 @@ const Modal = ({ isOpen, onClose, tripData, onSaveBooking }) => {
           <div className="trip-info">
             <h3 data-test-id="book-trip-popup-title"
                 className="trip-info__title">
-                {tripData.title}
+              {tripData.title}
             </h3>
             <div className="trip-info__content">
               <span data-test-id="book-trip-popup-duration" className="trip-info__duration">

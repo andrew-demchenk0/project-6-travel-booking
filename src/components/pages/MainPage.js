@@ -55,8 +55,8 @@ const MainPage = () => {
     <>
       <TripsFilter onSearchChange={handleSearchChange}
                    onDurationChange={handleDurationChange}
-                   onLevelChange={handleLevelChange} />
-      <TripsList trips={filteredTrips} />
+                   onLevelChange={handleLevelChange}/>
+      <TripsList trips={filteredTrips}/>
     </>
   );
 };

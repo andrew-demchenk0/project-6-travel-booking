@@ -15,6 +15,7 @@ export const signInUserAPI = async (credentials) => {
 
     const data = await response.json();
     localStorage.setItem('token', data.token);
+    localStorage.setItem('fullName', data.user.fullName);
     return data.user;
   } catch (error) {
     throw error;
@@ -57,9 +58,9 @@ export const fetchCurrentUserAPI = async () => {
       throw new Error('User not authenticated.');
     }
 
-    const data = await response.json();
-    return data.user;
+    return await response.json();
   } catch (error) {
     throw error;
   }
 };
+

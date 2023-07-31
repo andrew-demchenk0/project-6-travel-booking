@@ -1,22 +1,20 @@
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import userSVG from '../../resources/images/user.svg';
 import briefcaseSVG from '../../resources/images/briefcase.svg';
 import './appHeader.scss';
-import {signOut} from "../../redux/authSlice";
+import { signOut } from "../../redux/authSlice";
 import { toast } from "react-toastify";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const AppHeader = () => {
   const location = useLocation();
   const showNavigation = !['/auth/sign-up', '/auth/sign-in'].includes(location.pathname);
   const dispatch = useDispatch();
-
+  const userFullName = localStorage.getItem('fullName');
   const handleSignOut = () => {
     dispatch(signOut());
     toast.success('You have successfully signed out.');
   };
-
-  const user = useSelector((state) => state.auth.user);
 
   return (
     <header className="header">
@@ -24,9 +22,9 @@ const AppHeader = () => {
         <Link to="/trips"
               data-test-id="header-logo"
               className="header__logo">
-              Travel App
+          Travel App
         </Link>
-        { showNavigation && (
+        {showNavigation && (
           <nav data-test-id="header-nav" className="header__nav">
             <ul className="nav-header__list">
               <li className="nav-header__item" title="Bookings">
@@ -44,7 +42,7 @@ const AppHeader = () => {
                   <ul data-test-id="header-profile-nav-list" className="profile-nav__list">
                     <li data-test-id="header-profile-nav-username"
                         className="profile-nav__item profile-nav__username">
-                        {user && user.fullName}
+                      {userFullName}
                     </li>
                     <li className="profile-nav__item">
                       <Link to="/auth/sign-in"

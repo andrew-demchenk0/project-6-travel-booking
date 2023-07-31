@@ -1,5 +1,5 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {signInUserAPI, signUpUserAPI, fetchCurrentUserAPI} from '../services/authService';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { signInUserAPI, signUpUserAPI, fetchCurrentUserAPI } from '../services/authService';
 
 export const signInUser = createAsyncThunk('auth/sign-in', signInUserAPI);
 export const signUpUser = createAsyncThunk('auth/sign-up', signUpUserAPI);
@@ -15,6 +15,7 @@ const authSlice = createSlice({
   reducers: {
     signOut: (state) => {
       localStorage.removeItem('token');
+      localStorage.removeItem('fullName');
       state.user = null;
     },
     setUser: (state, action) => {
@@ -35,6 +36,11 @@ const authSlice = createSlice({
       .addCase(signInUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        if (action.error.message === 'User not authenticated') {
+          state.user = null;
+          localStorage.removeItem('token');
+          localStorage.removeItem('fullName');
+        }
       })
       .addCase(signUpUser.pending, (state) => {
         state.loading = true;
@@ -61,9 +67,14 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        if (action.error.message === 'User not authenticated') {
+          state.user = null;
+          localStorage.removeItem('token');
+          localStorage.removeItem('fullName');
+        }
       });
   },
 });
 
-export const {signOut, setUser} = authSlice.actions;
+export const { signOut } = authSlice.actions;
 export default authSlice.reducer;

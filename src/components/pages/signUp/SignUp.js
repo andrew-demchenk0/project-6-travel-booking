@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {setUser, signUpUser} from '../../../redux/authSlice';
+import { signUpUser } from '../../../redux/authSlice';
 import { toast } from 'react-toastify';
 import '../../../css/signIn-signUp.scss';
 
@@ -37,10 +37,8 @@ const SignUp = () => {
       return;
     }
     try {
-      const user = await dispatch(signUpUser(formData));
+      await dispatch(signUpUser(formData));
       toast.success('You have successfully signed up.');
-      dispatch(setUser(user));
-      // await dispatch(signUpUser(formData));
       navigate('/');
     } catch (error) {
       toast.error('Error during sign up. Please try again.');
@@ -60,8 +58,7 @@ const SignUp = () => {
             type="text"
             required=""
             value={formData.fullName}
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}/>
         </label>
         <label className="input">
           <span className="input__heading">Email</span>
@@ -71,8 +68,7 @@ const SignUp = () => {
             type="email"
             required=""
             value={formData.email}
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}/>
         </label>
         <label className="input">
           <span className="input__heading">Password</span>
@@ -83,8 +79,7 @@ const SignUp = () => {
             autoComplete="new-password"
             required=""
             value={formData.password}
-            onChange={handleInputChange}
-          />
+            onChange={handleInputChange}/>
         </label>
         <button
           data-test-id="auth-submit"
@@ -97,8 +92,10 @@ const SignUp = () => {
       </form>
       <span>
         Already have an account?
-        <Link to="/auth/sign-in" data-test-id="auth-sign-in-link" className="sign-up-form__link">
-          Sign In
+        <Link to="/auth/sign-in"
+              data-test-id="auth-sign-in-link"
+              className="sign-up-form__link">
+              Sign In
         </Link>
       </span>
     </main>
