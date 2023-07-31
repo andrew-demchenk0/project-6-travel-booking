@@ -1,7 +1,6 @@
 const apiUrl = 'https://binary-travel-app.xyz/api/v1';
-const token = localStorage.getItem('token')
 
-export const getBookingsAPI = async () => {
+export const getBookingsAPI = async (token) => {
   try {
     const response = await fetch(`${apiUrl}/bookings`, {
       method: 'GET',
@@ -21,7 +20,7 @@ export const getBookingsAPI = async () => {
   }
 };
 
-export const bookTripAPI = async (bookingData) => {
+export const bookTripAPI = async (bookingData, token) => {
   try {
     const response = await fetch(`${apiUrl}/bookings`, {
       method: 'POST',
@@ -41,7 +40,7 @@ export const bookTripAPI = async (bookingData) => {
   }
 };
 
-export const cancelBookingAPI = async (bookingId) => {
+export const cancelBookingAPI = async (bookingId, token) => {
   try {
     const response = await fetch(`${apiUrl}/bookings/${bookingId}`, {
       method: 'DELETE',
