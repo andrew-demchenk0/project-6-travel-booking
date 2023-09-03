@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signUpUser } from '../../../redux/authSlice';
 import { toast } from 'react-toastify';
 import '../../../css/signIn-signUp.scss';
@@ -8,7 +8,7 @@ import '../../../css/signIn-signUp.scss';
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth.loading);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -36,12 +36,22 @@ const SignUp = () => {
       toast.error("Password must be between 3 and 20 characters.");
       return;
     }
+
+    setLoading(true);
+
     try {
-      await dispatch(signUpUser(formData));
-      toast.success('You have successfully signed up.');
-      navigate('/');
+      const response = await dispatch(signUpUser(formData));
+
+      if (response.error) {
+        toast.error('User with this email already exists');
+      } else {
+        toast.success('You have successfully signed up.');
+        navigate('/');
+      }
     } catch (error) {
       toast.error('Error during sign up. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 

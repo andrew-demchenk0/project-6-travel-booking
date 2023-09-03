@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 const apiUrl = 'https://binary-travel-app.xyz/api/v1';
 export const signInUserAPI = async (credentials) => {
   try {
@@ -38,6 +40,7 @@ export const signUpUserAPI = async (userData) => {
 
     const data = await response.json();
     localStorage.setItem('token', data.token);
+    localStorage.setItem('fullName', data.user.fullName);
     return data.user;
   } catch (error) {
     throw error;
