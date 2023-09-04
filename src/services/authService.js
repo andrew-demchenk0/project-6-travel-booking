@@ -8,7 +8,6 @@ export const signInUserAPI = async (credentials) => {
       },
       body: JSON.stringify(credentials),
     });
-    console.log('res', response)
     if (!response.ok) {
       throw new Error('Invalid credentials.');
     }
