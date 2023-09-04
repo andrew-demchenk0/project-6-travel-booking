@@ -1,6 +1,6 @@
 # Travel booking
 React application in connection with redux and API. Adaptive design. A simple example of a travel booking application. Simple registration and storage of reservations has been implemented
-### ☞ [Preview]() ☜
+### ☞ [Preview](https://project-6-travel-booking.vercel.app) ☜
 
 
 ## 🛠 Skills
