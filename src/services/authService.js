@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 const apiUrl = 'https://binary-travel-app.xyz/api/v1';
 export const signInUserAPI = async (credentials) => {
   try {
@@ -10,7 +8,6 @@ export const signInUserAPI = async (credentials) => {
       },
       body: JSON.stringify(credentials),
     });
-
     if (!response.ok) {
       throw new Error('Invalid credentials.');
     }
