@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signInUser } from '../../../redux/authSlice';
 import { toast } from 'react-toastify';
 import '../../../css/signIn-signUp.scss';
@@ -8,7 +8,7 @@ import '../../../css/signIn-signUp.scss';
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth.loading);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -35,12 +35,26 @@ const SignIn = () => {
       toast.error("Password must be between 3 and 20 characters.");
       return;
     }
+
+    setLoading(true);
+
     try {
-      await dispatch(signInUser(formData));
-      toast.success('You have successfully signed in.');
-      navigate('/');
+      const response = await dispatch(signInUser(formData));
+
+      if (response && response.error) {
+        if (response.error.message === 'Credentials are incorrect') {
+          toast.error('Invalid credentials. Please try again.');
+        } else {
+          toast.error('Error during sign in. Please try again.');
+        }
+      } else {
+        toast.success('You have successfully signed in.');
+        navigate('/');
+      }
     } catch (error) {
-      toast.error('Invalid credentials. Please try again.');
+      toast.error('Error during sign in. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
